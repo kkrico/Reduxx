@@ -53,7 +53,7 @@ class BeneficiarioForm extends React.Component {
         return (
             <Grid>
                 <form>
-                    <h1>Form</h1>
+                    <h1>Beneficiario</h1>
                 </form>
             </Grid>
         )
