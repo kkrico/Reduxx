@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
-import AddBeneficiarioForm from './beneficiario/AddBeneficiarioForm';
+import AddFuncionarioForm from './beneficiario/AddBeneficiarioForm';
 
 function reducer(
     state = { },
@@ -23,7 +23,7 @@ let store = Redux.createStore(
 ReactDOM.render(<BrowserRouter>
     <ReactRedux.Provider store={store}>
         <React.Fragment>
-            <Route exact path="/" component={AddBeneficiarioForm} />
+            <Route exact path="/" component={AddFuncionarioForm} />
         </React.Fragment>
     </ReactRedux.Provider>
 </BrowserRouter>, document.getElementById('root'));
