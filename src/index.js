@@ -4,7 +4,9 @@ import * as Redux from 'redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as ReactRedux from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
+import FuncionarioList from './funcionario/FuncionarioList';
 import AddFuncionarioForm from './funcionario/AddFuncionarioForm';
+
 
 function reducer(
     state = {},
@@ -22,7 +24,8 @@ let store = Redux.createStore(
 ReactDOM.render(<BrowserRouter store={store}>
     <ReactRedux.Provider>
         <React.Fragment>
-            <Route exact path="/" component={AddFuncionarioForm} />
+            <Route exact path="/" component={FuncionarioList} />
+            <Route exact path="/novo" component={AddFuncionarioForm} />
         </React.Fragment>
     </ReactRedux.Provider>
 </BrowserRouter>, document.getElementById('root'));
