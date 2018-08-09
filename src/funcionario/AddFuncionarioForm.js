@@ -3,6 +3,16 @@ import { withFormik } from 'formik';
 import { withRouter } from 'react-router-dom';
 import { Panel, Row, Col, Button, Grid, Alert } from 'react-bootstrap/lib';
 
+
+function guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  }
+
 const FuncionarioForm = props => {
     const {
         values,
@@ -69,18 +79,18 @@ const FuncionarioForm = props => {
                                 </div>
                             </Col>
                             <Col lg={4} xs={12}>
-                                <div className={errors.data && touched.data ? ("form-group has-error") : ("form-group")}>
-                                    <label htmlFor="data" className="control-label">
+                                <div className={errors.dataaniversario && touched.dataaniversario ? ("form-group has-error") : ("form-group")}>
+                                    <label htmlFor="dataaniversario" className="control-label">
                                         Data
                                     </label>
                                     <input
-                                        id="data"
+                                        id="dataaniversario"
                                         type="date"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.data}
+                                        value={values.dataaniversario}
                                         className={
-                                            errors.data && touched.data ? ('form-control text-input error') : ('form-control text-input')
+                                            errors.dataaniversario && touched.dataaniversario ? ('form-control text-input error') : ('form-control text-input')
                                         }
                                     />
                                 </div>
@@ -100,7 +110,7 @@ const FuncionarioForm = props => {
 
 
 const AddFuncionarioForm = withFormik({
-    mapPropsToValues: () => ({ email: '', nome: '', data: '' }),
+    mapPropsToValues: () => ({ email: '', nome: '', dataaniversario: '' }),
     validateOnBlur: false,
     validateOnChange: false,
     validate: values => {
@@ -115,8 +125,8 @@ const AddFuncionarioForm = withFormik({
             errors.nome = "O Name é obrigatório";
         }
 
-        if (!values.data) {
-            errors.data = "A data de aniversário é obrigatória";
+        if (!values.dataaniversario) {
+            errors.dataaniversario = "A Data de aniversário é obrigatória";
         }
 
         return errors;
@@ -125,14 +135,14 @@ const AddFuncionarioForm = withFormik({
     handleSubmit: (values, props) => {
 
         const { setSubmitting } = props;
-        debugger;
 
         setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
         }, 1000);
 
-        let url = "https://jsonplaceholder.typicode.com/posts";
+        values.id = guid();
+        let url = "http://localhost:58985/api/v1/funcionarios";
         fetch(url, {
             method: "POST",
             mode: "cors",
@@ -143,7 +153,7 @@ const AddFuncionarioForm = withFormik({
             },
             redirect: "follow", // manual, *follow, error
             referrer: "no-referrer", // no-referrer, *client
-            body: JSON.stringify(values), // body data type must match "Content-Type" header
+            body: JSON.stringify(values), // body dataaniversario type must match "Content-Type" header
         }).then(response => {
             props.props.history.push("/");
         })
