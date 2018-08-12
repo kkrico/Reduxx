@@ -5,17 +5,58 @@ import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/lib/Table';
 import Grid from 'react-bootstrap/lib/Grid';
 
+export const FETCH_PRODUCTS_BEGIN = 'FETCH_PRODUCTS_BEGIN';
+export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
+export const FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';
+
+export const fetchProductsBegin = () => ({
+    type: FETCH_PRODUCTS_BEGIN
+});
+
+export const fetchProductsSuccess = products => ({
+    type: FETCH_PRODUCTS_SUCCESS,
+    payload: { products }
+});
+
+export const fetchProductsError = error => ({
+    type: FETCH_PRODUCTS_FAILURE,
+    payload: { error }
+});
+
 function mapStateToProps(state) {
     return {
         authors: state.authors
     };
 }
 
+function fetchProducts() {
 
-const AuthorQuiz = connect(mapStateToProps, null)(
-    function (props) {
-        debugger;
-        const haFuncionarioCadastrado = props.authors.length > 0;
+    return dispatch => {
+        dispatch(fetchProductsBegin());
+        return fetch("http://localhost:58985/api/v1/funcionarios")
+            .then(res => res.json())
+            .then(json => {
+                dispatch(fetchProductsSuccess(json.data));
+                return json.data;
+            })
+            .catch(error => dispatch(fetchProductsError(error)));
+    };
+}
+
+class FuncionarioList extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            authors: props.authors
+        }
+    }
+    componentDidMount() {
+        this.props.dispatch(fetchProducts());
+    }
+
+    render() {
+        const haFuncionarioCadastrado = this.props.authors.length > 0;
         if (haFuncionarioCadastrado)
             return (
                 <Grid>
@@ -30,13 +71,11 @@ const AuthorQuiz = connect(mapStateToProps, null)(
                         </thead>
                         <tbody>
                             {
-                                Object.keys(props.authors).map(function (chave, index) {
-                                    debugger;
-
-                                    return <tr key={index}>
-                                        <td>{props.authors[chave].nome}</td>
-                                        <td>{props.authors[chave].email}</td>
-                                        <td>{props.authors[chave].dataaniversario}</td>
+                                this.props.authors.map(function (author, chave) {
+                                    return <tr key={chave}>
+                                        <td>{author.nome}</td>
+                                        <td>{author.email}</td>
+                                        <td>{author.dataAniversario}</td>
                                     </tr>
                                 })
                             }
@@ -67,6 +106,7 @@ const AuthorQuiz = connect(mapStateToProps, null)(
                     <Link to="/add">Adicionar funcionario</Link>
                 </Grid >
             );
-    });
+    }
+}
 
-export default AuthorQuiz;
+export default connect(mapStateToProps, null)(FuncionarioList);

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import thunk from 'redux-thunk';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
@@ -9,25 +8,31 @@ import AddAuthorForm from './AddAuthorForm';
 import registerServiceWorker from './registerServiceWorker';
 import { shuffle, sample } from 'underscore';
 import ListaFuncionario from './ListaFuncionario';
+import productList from './productList';
+import thunk from 'redux-thunk'
 
 const authors = [];
 
 let store = Redux.createStore(
     reducer,
-    Redux.applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    Redux.applyMiddleware(thunk)
 );
 
 function reducer(state = {
     authors
 }, action) {
-    debugger;
     switch (action.type) {
         case 'ADD_AUTHOR':
             alert("Adicionado func" + JSON.stringify(action));
             return Object.assign({}, state, {
                 authors: state.authors.concat([action.author])
             });
+        case "FETCH_PRODUCTS_SUCCESS":
+            return {
+                ...state,
+                authors: action.payload.products
+            };
         default: return state;
     }
 }
