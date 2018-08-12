@@ -133,6 +133,10 @@ const EnhancedForm = withFormik({
     handleSubmit: (values, { setSubmitting, ...handleSubmit }) => {
         debugger;
         let url = "https://jsonplaceholder.typicode.com/posts";
+
+        handleSubmit.setError({
+            email : "Erro do submit"
+        })
         fetch(url, {
             method: "POST",
             mode: "cors",
@@ -156,7 +160,7 @@ const EnhancedForm = withFormik({
     },
     validateOnBlur: false,
     validateOnChange: false,
-    displayName: 'BasicForm', // helps with React DevTools
+    displayName: 'Funcionario Form', // helps with React DevTools
 })(FuncionarioInnerForm);
 
 export default withRouter(connect(() => { }, null)(EnhancedForm));
