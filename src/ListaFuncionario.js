@@ -84,7 +84,7 @@ class FuncionarioList extends React.Component {
 
     confirmaExclusao(guid) {
         this.props.dispatch(deleteAuthor(guid));
-        this.setState({show : false});
+        this.setState({ show: false });
     }
 
     componentDidMount() {
@@ -121,7 +121,11 @@ class FuncionarioList extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.props.authors.map(function (author, chave) {
+                                this.props.authors.sort((a,b) => {
+                                    if (a.nome < b.nome) return -1;
+                                    if (a.nome > b.nome) return 1;
+                                    return 0;
+                                }).map(function (author, chave) {
                                     return <tr key={chave}>
                                         <td>{author.nome}</td>
                                         <td>{author.email}</td>
