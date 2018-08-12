@@ -12,25 +12,15 @@ import Button from 'react-bootstrap/lib/Button';
 
 // Our inner form component. Will be wrapped with Formik({..})
 class FuncionarioInnerForm extends React.Component {
-    guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-    }
     render() {
         const {
             values,
             touched,
             errors,
-            dirty,
             isSubmitting,
             handleChange,
             handleBlur,
             handleSubmit,
-            handleReset,
         } = this.props;
 
         return (
@@ -87,18 +77,18 @@ class FuncionarioInnerForm extends React.Component {
                                     </div>
                                 </Col>
                                 <Col lg={4} xs={12}>
-                                    <div className={errors.datanascimento && touched.datanascimento ? ("form-group has-error") : ("form-group")}>
-                                        <label htmlFor="datanascimento" className="control-label">
+                                    <div className={errors.dataaniversario && touched.dataaniversario ? ("form-group has-error") : ("form-group")}>
+                                        <label htmlFor="dataaniversario" className="control-label">
                                             Data
                                     </label>
                                         <input
-                                            id="datanascimento"
+                                            id="dataaniversario"
                                             type="date"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            value={values.datanascimento}
+                                            value={values.dataaniversario}
                                             className={
-                                                errors.datanascimento && touched.datanascimento ? ('form-control text-input error') : ('form-control text-input')
+                                                errors.dataaniversario && touched.dataaniversario ? ('form-control text-input error') : ('form-control text-input')
                                             }
                                         />
                                     </div>
@@ -120,23 +110,19 @@ class FuncionarioInnerForm extends React.Component {
 
 
 const EnhancedForm = withFormik({
-    mapPropsToValues: () => ({ email: '', datanascimento: '', nome: '' }),
+    mapPropsToValues: () => ({ email: '', dataaniversario: '', nome: '' }),
     validationSchema: Yup.object().shape({
         email: Yup.string()
             .email('O email é inválido')
             .required('O campo email é obrigatório!'),
         nome: Yup.string()
             .required("O campo Nome é obrigatório"),
-        datanascimento: Yup.date()
-            .required("A data de nascimento é obrigatório")
+        dataaniversario: Yup.date()
+            .required("A data de aniversário é obrigatória")
     }),
     handleSubmit: (values, { setSubmitting, ...handleSubmit }) => {
-        debugger;
-        let url = "https://jsonplaceholder.typicode.com/posts";
+        let url = "http://localhost:58985/api/v1/funcionarios";
 
-        handleSubmit.setError({
-            email : "Erro do submit"
-        })
         fetch(url, {
             method: "POST",
             mode: "cors",
@@ -151,11 +137,23 @@ const EnhancedForm = withFormik({
         })
             .then(response => {
                 return response.json();
+            }, response => {
+                window.localStorage.setItem("API_ERROR", JSON.stringify(response));
+                handleSubmit.setErrors({
+                    response: "Error ao conectar na API. Favor tentar novamente mais tarde"
+                })
             })
             .then(resultado => {
-                debugger;
-                handleSubmit.props.dispatch({ type: "ADD_AUTHOR", resultado });
-                handleSubmit.props.history.push("/")
+
+                if (resultado.success) {
+                    handleSubmit.props.dispatch({ type: "ADD_AUTHOR", resultado });
+                    handleSubmit.props.history.push("/")
+                } else {
+                    handleSubmit.setErrors(
+                        Object.assign({}, resultado.errors)
+                    )
+                }
+                setSubmitting(false);
             })
     },
     validateOnBlur: false,
