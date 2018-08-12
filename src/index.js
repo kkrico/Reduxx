@@ -24,9 +24,8 @@ function reducer(state = {
 }, action) {
     switch (action.type) {
         case 'ADD_AUTHOR':
-            alert("Adicionado func" + JSON.stringify(action));
             return Object.assign({}, state, {
-                authors: state.authors.concat([action.author])
+                authors: state.authors.concat([action.data])
             });
         case "FETCH_PRODUCTS_SUCCESS":
             return {

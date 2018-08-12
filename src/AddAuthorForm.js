@@ -146,7 +146,9 @@ const EnhancedForm = withFormik({
             .then(resultado => {
 
                 if (resultado.success) {
-                    handleSubmit.props.dispatch({ type: "ADD_AUTHOR", resultado });
+                    debugger;
+                    let data = resultado.data;
+                    handleSubmit.props.dispatch({ type: "ADD_AUTHOR", data });
                     handleSubmit.props.history.push("/")
                 } else {
                     handleSubmit.setErrors(
