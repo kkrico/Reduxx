@@ -20,12 +20,21 @@ let store = Redux.createStore(
 );
 
 function reducer(state = {
-    authors
+    authors,
 }, action) {
     switch (action.type) {
         case 'ADD_AUTHOR':
             return Object.assign({}, state, {
                 authors: state.authors.concat([action.data])
+            });
+        case "FETCH_SINGLE_AUTOR":
+            // return {
+            //     ...state,
+            //     selectedAuthor: action.payload
+            // };
+
+            return Object.assign({}, state, {
+                selectedAuthor: Object.assign({}, action.payload)
             });
         case "FETCH_PRODUCTS_SUCCESS":
             return {
@@ -43,6 +52,7 @@ ReactDOM.render(
             <React.Fragment>
                 <Route exact path="/" component={ListaFuncionario} />
                 <Route path="/add" component={AddAuthorForm} />
+                <Route path="/edit/:id" component={AddAuthorForm} />
             </React.Fragment>
         </ReactRedux.Provider>
     </BrowserRouter>, document.getElementById('root'));

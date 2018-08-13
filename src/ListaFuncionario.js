@@ -99,10 +99,6 @@ class FuncionarioList extends React.Component {
         this.setState({ show: false });
     }
 
-    handleClickEditar(evt) {
-        debugger;
-    }
-
     render() {
         this.handleClose = this.handleClose.bind(this);
 
@@ -121,7 +117,7 @@ class FuncionarioList extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.props.authors.sort((a,b) => {
+                                this.props.authors.sort((a, b) => {
                                     if (a.nome < b.nome) return -1;
                                     if (a.nome > b.nome) return 1;
                                     return 0;
@@ -131,7 +127,7 @@ class FuncionarioList extends React.Component {
                                         <td>{author.email}</td>
                                         <td>{new Date(author.dataAniversario).toLocaleDateString()}</td>
                                         <td>
-                                            <span onClick={this.handleClickEditar}>Editar</span>
+                                            <Link to={"/edit/" + author.id}>Editar</Link>
                                             <span onClick={() => this.handleClickExcluir(author)}>Excluir</span>
                                         </td>
                                     </tr>
