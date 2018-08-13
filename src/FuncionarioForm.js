@@ -65,7 +65,6 @@ class FuncionarioForm extends React.Component {
     render() {
         const {
             values,
-            touched,
             errors,
             isSubmitting,
             handleChange,
@@ -108,9 +107,10 @@ class FuncionarioForm extends React.Component {
 
 const FuncionarioFormValidavel = withFormik({
     mapPropsToValues: (props) => {
-        const isEdicao = props.history.location.pathname.includes("edit");
-        if (isEdicao) {
 
+        const isEdicao = props.history.location.pathname.includes("edit");
+
+        if (isEdicao) {
             if (props.selectedAuthor === undefined || props.match.params.id !== props.selectedAuthor.id) {
                 let url = "http://localhost:58985/api/v1/funcionarios/" + props.match.params.id;
                 fetch(url)
@@ -144,36 +144,38 @@ const FuncionarioFormValidavel = withFormik({
         dataaniversario: Yup.date()
             .required("A data de aniversário é obrigatória")
     }),
-    handleSubmit: (values, { setSubmitting, ...handleSubmit }) => {
+    handleSubmit: async (values, { setSubmitting, ...handleSubmit }) => {
         let url = "http://localhost:58985/api/v1/funcionarios";
         fetch(url, {
             method: values.isEdicao ? "PUT" : "POST",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin", // include, same-origin, *omit
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
             },
-            redirect: "follow", // manual, *follow, error
-            referrer: "no-referrer", // no-referrer, *client
             body: JSON.stringify(values), // body data type must match "Content-Type" header
         })
             .then(response => {
-                return response.json();
+                if (response !== undefined)
+                    return response.json();
+                else
+                    throw new Error("API ERROR. Response: " + JSON.stringify(response));
+
             }, response => {
-                throw "API ERROR. Response: " + JSON.stringify(response);
+                throw new Error("API ERROR. Response: " + JSON.stringify(response));
             })
             .then(resultado => {
                 if (resultado.success) {
-                    let data = resultado.data;
-                    handleSubmit.props.dispatch({ type: "ADD_AUTHOR", data });
-                    handleSubmit.props.history.push("/")
+                    let payload = {
+                        author: resultado.data,
+                        message: "Funcionário " + resultado.data.nome + " " + (values.isEdicao ? "alterado" : "inserido") + " com sucesso"
+                    };
+                    handleSubmit.props.dispatch({ type: "ADD_AUTHOR", payload });
+                    handleSubmit.props.history.push("/");
                 } else {
                     handleSubmit.setErrors(
                         Object.assign({}, resultado.errors)
                     )
+                    setSubmitting(false);
                 }
-                setSubmitting(false);
             })
             .catch(reason => {
                 window.localStorage.setItem("API_ERROR", JSON.stringify(reason));

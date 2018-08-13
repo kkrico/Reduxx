@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Table from 'react-bootstrap/lib/Table';
 import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
+import FuncionarioMessage from './FuncionarioMessage';
 
 export const FETCH_FUNCIONARIO_BEGIN = 'FETCH_FUNCIONARIO_BEGIN';
 export const FETCH_FUNCIONARIO_SUCCESS = 'FETCH_FUNCIONARIO_SUCCESS';
@@ -45,12 +46,13 @@ export const fetchProductsError = error => ({
 
 function mapStateToProps(state) {
     return {
+        messages: state.messages,
         authors: state.authors
     };
 }
 
-function deleteAuthor(guid) {
-    let url = "http://localhost:58985/api/v1/funcionarios/" + guid;
+function deleteAuthor({ id, nome }) {
+    let url = "http://localhost:58985/api/v1/funcionarios/" + id;
 
     return dispatch => {
         fetch(url, {
@@ -70,6 +72,7 @@ function deleteAuthor(guid) {
                 window.localStorage.setItem("API_ERROR", JSON.stringify(response));
             })
             .then(resultado => {
+                dispatch({ type: "REMOVED_AUTHOR", payload: nome + " removido com sucesso" })
                 dispatch(fetchProducts());
             })
     }
@@ -86,7 +89,7 @@ function FuncionarioModalExclusao({ show, selectedAuthor, onDismiss, onExclusao 
             <h4>Confirma a exclusão de {selectedAuthor.nome} - {selectedAuthor.email}?</h4>
         </Modal.Body>
         <Modal.Footer>
-            <Button onClick={() => onExclusao(selectedAuthor.id)} bsStyle="primary">Confirmar</Button>
+            <Button onClick={() => onExclusao(selectedAuthor)} bsStyle="primary">Confirmar</Button>
             <Button onClick={onDismiss}>Sair</Button>
         </Modal.Footer>
     </Modal>);
@@ -96,7 +99,7 @@ function fetchProducts() {
         dispatch(fetchProductsBegin());
         return fetch("http://localhost:58985/api/v1/funcionarios")
             .then(res => res.json(), response => {
-                throw "API ERROR. Response: " + JSON.stringify(response);
+                throw new Error("API ERROR. Response: " + JSON.stringify(response));
             })
             .then(json => {
                 dispatch(fetchProductsSuccess(json.data));
@@ -117,8 +120,9 @@ class FuncionarioList extends React.Component {
         }
     }
 
-    confirmaExclusao(guid) {
-        this.props.dispatch(deleteAuthor(guid));
+    confirmaExclusao({ id, nome }) {
+        debugger;
+        this.props.dispatch(deleteAuthor({ id, nome }));
         this.setState({ show: false });
     }
 
@@ -141,6 +145,7 @@ class FuncionarioList extends React.Component {
         if (haFuncionarioCadastrado)
             return (
                 <div>
+                    <FuncionarioMessage messages={this.props.messages} />
                     <h1>Funcionários</h1>
                     <Table>
                         <thead>
@@ -163,18 +168,18 @@ class FuncionarioList extends React.Component {
                                         <td>{new Date(author.dataAniversario).toLocaleDateString()}</td>
                                         <td>
                                             <Link to={"/edit/" + author.id}>
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </Link>
                                         </td>
                                         <td>
                                             <a href="" title="Detalhar">
-                                                <i class="fa fa-list-alt" aria-hidden="true"></i>
+                                                <i className="fa fa-list-alt" aria-hidden="true"></i>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="#" title="Excluir" onClick={() => this.handleClickExcluir(author)} >
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                            </a>
+                                            <button className="btn btn-link" href="#" title="Excluir" onClick={() => this.handleClickExcluir(author)} >
+                                                <i className="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
                                         </td>
                                         <td>
                                         </td>

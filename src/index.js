@@ -11,20 +11,28 @@ import './skin-blue.css';
 import './main.css';
 
 const authors = [];
+const messages = [];
 
 let store = Redux.createStore(
-    reducer,
+    funcionarioReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     Redux.applyMiddleware(thunk)
 );
 
-function reducer(state = {
-    authors,
+function funcionarioReducer(state = {
+    authors, messages
 }, action) {
+
     switch (action.type) {
+        case "REMOVED_AUTHOR":
+        return Object.assign({}, state, {
+            messages: [action.payload],
+            //authors: state.authors.concat([action.payload.author])
+    });
         case 'ADD_AUTHOR':
             return Object.assign({}, state, {
-                authors: state.authors.concat([action.data])
+                    messages: [action.payload.message],
+                    //authors: state.authors.concat([action.payload.author])
             });
         case "FETCH_SINGLE_AUTOR":
             return Object.assign({}, state, {
