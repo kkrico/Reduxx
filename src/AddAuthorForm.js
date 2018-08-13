@@ -162,7 +162,6 @@ const EnhancedForm = withFormik({
 
     enableReinitialize: true,
     handleSubmit: (values, { setSubmitting, ...handleSubmit }) => {
-        debugger;
         let url = "http://localhost:58985/api/v1/funcionarios";
         fetch(url, {
             method: values.isEdicao ? "PUT" : "POST",
