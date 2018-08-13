@@ -82,13 +82,13 @@ class FuncionarioForm extends React.Component {
                         <Panel.Body>
                             <Row className="show-grid">
                                 <Col lg={4} xs={12}>
-                                    <FuncionarioInput {...this.props} type="text" nomeCampo="nome" placeholder="Seu Nome" onChange={handleChange} onBlur={handleBlur} />
+                                    <FuncionarioInput {...this.props} value={values["nome"]} type="text" nomeCampo="nome" placeholder="Seu Nome" onChange={handleChange} onBlur={handleBlur} />
                                 </Col>
                                 <Col lg={4} xs={12}>
-                                    <FuncionarioInput {...this.props} type="text" nomeCampo="email" placeholder="Seu Email" onChange={handleChange} onBlur={handleBlur} />
+                                    <FuncionarioInput {...this.props} value={values["email"]} type="text" nomeCampo="email" placeholder="Seu Email" onChange={handleChange} onBlur={handleBlur} />
                                 </Col>
                                 <Col lg={4} xs={12}>
-                                    <FuncionarioInput {...this.props} type="date" nomeCampo="dataaniversario" placeholder="Seu Email" onChange={handleChange} onBlur={handleBlur} displayName="Data de Aniversário" />
+                                    <FuncionarioInput {...this.props} value={values["dataaniversario"]} type="date" nomeCampo="dataaniversario" placeholder="Seu Email" onChange={handleChange} onBlur={handleBlur} displayName="Data de Aniversário" />
                                 </Col>
                             </Row>
                         </Panel.Body>
@@ -144,7 +144,6 @@ const FuncionarioFormValidavel = withFormik({
         dataaniversario: Yup.date()
             .required("A data de aniversário é obrigatória")
     }),
-    enableReinitialize: true,
     handleSubmit: (values, { setSubmitting, ...handleSubmit }) => {
         let url = "http://localhost:58985/api/v1/funcionarios";
         fetch(url, {
@@ -185,6 +184,7 @@ const FuncionarioFormValidavel = withFormik({
     },
     validateOnBlur: false,
     validateOnChange: false,
+    enableReinitialize: true,
     displayName: 'Funcionario Form', // helps with React DevTools
 })(FuncionarioForm);
 
