@@ -9,9 +9,59 @@ import Col from 'react-bootstrap/lib/Col';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 
+function titleize(text) {
+    var loweredText = text.toLowerCase();
+    var words = loweredText.split(" ");
+    for (var a = 0; a < words.length; a++) {
+        var w = words[a];
 
-// Our inner form component. Will be wrapped with Formik({..})
-class FuncionarioInnerForm extends React.Component {
+        var firstLetter = w[0];
+        w = firstLetter.toUpperCase() + w.slice(1);
+
+        words[a] = w;
+    }
+    return words.join(" ");
+}
+
+function ErrosValidacao({ errors }) {
+    return (
+        Object.keys(errors).length > 0 && (
+            <Alert bsStyle="danger">
+                {
+                    Object.keys(errors).map(function (chave, index) {
+                        return <p key={index}>{errors[chave]}</p>
+                    })
+                }
+            </Alert>
+        )
+    )
+}
+
+function FuncionarioInput({ nomeCampo, errors, touched, placeholder, onChange, onBlur, value, type, displayName = nomeCampo }) {
+    const haErroNoCampo = errors[nomeCampo] && touched[nomeCampo];
+
+    return (
+
+        <div className={haErroNoCampo ? ("form-group has-error") : ("form-group")}>
+            <label htmlFor={nomeCampo} className="control-label">
+                {titleize(displayName)}
+            </label>
+            <input
+                id={nomeCampo}
+                placeholder={placeholder}
+                type={type}
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                className={
+                    haErroNoCampo ? ('form-control error') : ('form-control')
+                }
+            />
+        </div>
+    )
+}
+
+class FuncionarioForm extends React.Component {
     render() {
         const {
             values,
@@ -25,73 +75,20 @@ class FuncionarioInnerForm extends React.Component {
 
         return (
             <div>
-                {
-                    Object.keys(errors).length > 0 && (
-                        <Alert bsStyle="danger">
-                            {
-                                Object.keys(errors).map(function (chave, index) {
-                                    return <p key={index}>{errors[chave]}</p>
-                                })
-                            }
-                        </Alert>
-                    )}
+                <ErrosValidacao errors={errors} />
                 <form onSubmit={handleSubmit}>
                     <Panel bsStyle="primary">
                         <Panel.Heading>Cadastro de funcionários</Panel.Heading>
                         <Panel.Body>
                             <Row className="show-grid">
                                 <Col lg={4} xs={12}>
-                                    <div className={errors.nome && touched.nome ? ("form-group has-error") : ("form-group")}>
-                                        <label htmlFor="nome" className="control-label">
-                                            Nome
-                                    </label>
-                                        <input
-                                            id="nome"
-                                            placeholder="Seu nome"
-                                            type="text"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.nome}
-                                            className={
-                                                errors.nome && touched.nome ? ('form-control text-input error') : ('form-control text-input')
-                                            }
-                                        />
-                                    </div>
+                                    <FuncionarioInput {...this.props} type="text" nomeCampo="nome" placeholder="Seu Nome" onChange={handleChange} onBlur={handleBlur} />
                                 </Col>
                                 <Col lg={4} xs={12}>
-                                    <div className={errors.email && touched.email ? ("form-group has-error") : ("form-group")}>
-                                        <label htmlFor="email" className="control-label">
-                                            Email
-                                    </label>
-                                        <input
-                                            id="email"
-                                            placeholder="Seu email"
-                                            type="text"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.email}
-                                            className={
-                                                errors.email && touched.email ? ('form-control text-input error') : ('form-control text-input')
-                                            }
-                                        />
-                                    </div>
+                                    <FuncionarioInput {...this.props} type="text" nomeCampo="email" placeholder="Seu Email" onChange={handleChange} onBlur={handleBlur} />
                                 </Col>
                                 <Col lg={4} xs={12}>
-                                    <div className={errors.dataaniversario && touched.dataaniversario ? ("form-group has-error") : ("form-group")}>
-                                        <label htmlFor="dataaniversario" className="control-label">
-                                            Data
-                                    </label>
-                                        <input
-                                            id="dataaniversario"
-                                            type="date"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.dataaniversario}
-                                            className={
-                                                errors.dataaniversario && touched.dataaniversario ? ('form-control text-input error') : ('form-control text-input')
-                                            }
-                                        />
-                                    </div>
+                                    <FuncionarioInput {...this.props} type="date" nomeCampo="dataaniversario" placeholder="Seu Email" onChange={handleChange} onBlur={handleBlur} displayName="Data de Aniversário" />
                                 </Col>
                             </Row>
                         </Panel.Body>
@@ -109,7 +106,7 @@ class FuncionarioInnerForm extends React.Component {
 
 
 
-const EnhancedForm = withFormik({
+const FuncionarioFormValidavel = withFormik({
     mapPropsToValues: (props) => {
         const isEdicao = props.history.location.pathname.includes("edit");
         if (isEdicao) {
@@ -147,7 +144,6 @@ const EnhancedForm = withFormik({
         dataaniversario: Yup.date()
             .required("A data de aniversário é obrigatória")
     }),
-
     enableReinitialize: true,
     handleSubmit: (values, { setSubmitting, ...handleSubmit }) => {
         let url = "http://localhost:58985/api/v1/funcionarios";
@@ -166,13 +162,9 @@ const EnhancedForm = withFormik({
             .then(response => {
                 return response.json();
             }, response => {
-                window.localStorage.setItem("API_ERROR", JSON.stringify(response));
-                handleSubmit.setErrors({
-                    response: "Error ao conectar na API. Favor tentar novamente mais tarde"
-                })
+                throw "API ERROR. Response: " + JSON.stringify(response);
             })
             .then(resultado => {
-
                 if (resultado.success) {
                     let data = resultado.data;
                     handleSubmit.props.dispatch({ type: "ADD_AUTHOR", data });
@@ -184,11 +176,17 @@ const EnhancedForm = withFormik({
                 }
                 setSubmitting(false);
             })
+            .catch(reason => {
+                window.localStorage.setItem("API_ERROR", JSON.stringify(reason));
+                handleSubmit.setErrors({
+                    response: "Erro ao conectar na API. Favor, atualize a página ou tente novamente mais tarde"
+                });
+            })
     },
     validateOnBlur: false,
     validateOnChange: false,
     displayName: 'Funcionario Form', // helps with React DevTools
-})(FuncionarioInnerForm);
+})(FuncionarioForm);
 
 
 const mapStateToProps = state => {
@@ -197,4 +195,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, null)(EnhancedForm));
+export default withRouter(connect(mapStateToProps, null)(FuncionarioFormValidavel));

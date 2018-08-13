@@ -73,8 +73,6 @@ function deleteAuthor(guid) {
                 dispatch(fetchProducts());
             })
     }
-
-
 }
 
 
@@ -97,7 +95,9 @@ function fetchProducts() {
     return dispatch => {
         dispatch(fetchProductsBegin());
         return fetch("http://localhost:58985/api/v1/funcionarios")
-            .then(res => res.json())
+            .then(res => res.json(), response => {
+                throw "API ERROR. Response: " + JSON.stringify(response);
+            })
             .then(json => {
                 dispatch(fetchProductsSuccess(json.data));
                 return json.data;
