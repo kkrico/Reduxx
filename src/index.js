@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
-import AddAuthorForm from './AddAuthorForm';
-import ListaFuncionario from './ListaFuncionario';
+import FuncionarioForm from './FuncionarioForm';
+import FuncionarioList from './FuncionarioList';
 import thunk from 'redux-thunk'
 import './AdminLTE.css';
 import './skin-blue.css';
@@ -44,9 +44,9 @@ ReactDOM.render(
     <BrowserRouter>
         <ReactRedux.Provider store={store}>
             <React.Fragment>
-                <Route exact path="/" component={ListaFuncionario} />
-                <Route path="/add" component={AddAuthorForm} />
-                <Route path="/edit/:id" component={AddAuthorForm} />
+                <Route exact path="/" component={FuncionarioList} />
+                <Route path="/add" component={FuncionarioForm} />
+                <Route path="/edit/:id" component={FuncionarioForm} />
             </React.Fragment>
         </ReactRedux.Provider>
     </BrowserRouter>, document.getElementById('root'));

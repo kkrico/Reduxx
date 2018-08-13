@@ -2,9 +2,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Table from 'react-bootstrap/lib/Table';
-import Grid from 'react-bootstrap/lib/Grid';
 import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
+
+export const FETCH_FUNCIONARIO_BEGIN = 'FETCH_FUNCIONARIO_BEGIN';
+export const FETCH_FUNCIONARIO_SUCCESS = 'FETCH_FUNCIONARIO_SUCCESS';
+export const FETCH_FUNCIONARIOS_SUCCESS = 'FETCH_FUNCIONARIO_SUCCESS';
+export const ADD_FUNCIONARIO = 'ADD_FUNCIONARIO';
+
+export const fetchFuncionarioBegin = () => ({
+    type: FETCH_FUNCIONARIO_BEGIN
+});
+
+export const fetch_Funcionarios_Success = funcionarios => ({
+    type: FETCH_FUNCIONARIOS_SUCCESS,
+    payload: { funcionarios }
+});
+
+export const fetch_Funcionario_Success = funcionario => ({
+    type: FETCH_FUNCIONARIO_SUCCESS,
+    payload: { funcionario }
+});
+
 
 export const FETCH_PRODUCTS_BEGIN = 'FETCH_PRODUCTS_BEGIN';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
@@ -58,6 +77,22 @@ function deleteAuthor(guid) {
 
 }
 
+
+function FuncionarioModalExclusao({ show, selectedAuthor, onDismiss, onExclusao }) {
+
+    return (<Modal show={show} onHide={onDismiss}>
+        <Modal.Header closeButton>
+            <Modal.Title>Exclusão</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <h4>Confirma a exclusão de {selectedAuthor.nome} - {selectedAuthor.email}?</h4>
+        </Modal.Body>
+        <Modal.Footer>
+            <Button onClick={() => onExclusao(selectedAuthor.id)} bsStyle="primary">Confirmar</Button>
+            <Button onClick={onDismiss}>Sair</Button>
+        </Modal.Footer>
+    </Modal>);
+}
 function fetchProducts() {
     return dispatch => {
         dispatch(fetchProductsBegin());
@@ -101,7 +136,7 @@ class FuncionarioList extends React.Component {
 
     render() {
         this.handleClose = this.handleClose.bind(this);
-
+        this.confirmaExclusao = this.confirmaExclusao.bind(this);
         const haFuncionarioCadastrado = this.props.authors.length > 0;
         if (haFuncionarioCadastrado)
             return (
@@ -132,7 +167,7 @@ class FuncionarioList extends React.Component {
                                             </Link>
                                         </td>
                                         <td>
-                                            <a href="#" title="Detalhar">
+                                            <a href="" title="Detalhar">
                                                 <i class="fa fa-list-alt" aria-hidden="true"></i>
                                             </a>
                                         </td>
@@ -142,32 +177,20 @@ class FuncionarioList extends React.Component {
                                             </a>
                                         </td>
                                         <td>
-
                                         </td>
                                     </tr>
                                 }, this)
                             }
                         </tbody>
                     </Table >
-                    <Modal show={this.state.show} onHide={this.handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Exclusão</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <h4>Confirma a exclusão de {this.state.selectedAuthor.nome} - {this.state.selectedAuthor.email}?</h4>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button onClick={() => this.confirmaExclusao(this.state.selectedAuthor.id)} bsStyle="primary">Confirmar</Button>
-                            <Button onClick={this.handleClose}>Sair</Button>
-                        </Modal.Footer>
-                    </Modal>
+                    <FuncionarioModalExclusao {...this.state} onDismiss={this.handleClose} onExclusao={this.confirmaExclusao} />
                     <Link to="/add">Adicionar funcionario</Link>
                 </div >
             );
 
         else
             return (
-                <Grid>
+                <div>
                     <h1>Funcionários</h1>
                     <Table striped bordered condensed hover >
                         <thead>
@@ -184,7 +207,7 @@ class FuncionarioList extends React.Component {
                         </tbody>
                     </Table >
                     <Link to="/add">Adicionar funcionario</Link>
-                </Grid >
+                </div >
             );
     }
 }

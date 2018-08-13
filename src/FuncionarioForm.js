@@ -3,24 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withFormik } from 'formik';
 import Yup from 'yup';
-import Grid from 'react-bootstrap/lib/Grid';
 import Panel from 'react-bootstrap/lib/Panel';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-}
 
 // Our inner form component. Will be wrapped with Formik({..})
 class FuncionarioInnerForm extends React.Component {
@@ -122,11 +110,11 @@ class FuncionarioInnerForm extends React.Component {
 
 
 const EnhancedForm = withFormik({
-    mapPropsToValues: (props, b) => {
+    mapPropsToValues: (props) => {
         const isEdicao = props.history.location.pathname.includes("edit");
         if (isEdicao) {
 
-            if (props.selectedAuthor == undefined || props.match.params.id != props.selectedAuthor.id) {
+            if (props.selectedAuthor === undefined || props.match.params.id !== props.selectedAuthor.id) {
                 let url = "http://localhost:58985/api/v1/funcionarios/" + props.match.params.id;
                 fetch(url)
                     .then(response => {
@@ -140,7 +128,7 @@ const EnhancedForm = withFormik({
                     })
             }
 
-            if (props.selectedAuthor == undefined) {
+            if (props.selectedAuthor === undefined) {
                 return ({ email: '', dataaniversario: '', nome: '', isEdicao });
             } else {
                 return ({ email: props.selectedAuthor.email, dataaniversario: props.selectedAuthor.dataAniversario.substring(0, 10), nome: props.selectedAuthor.nome, isEdicao, id: props.selectedAuthor.id });
@@ -208,6 +196,5 @@ const mapStateToProps = state => {
         selectedAuthor: state.selectedAuthor
     }
 }
-
 
 export default withRouter(connect(mapStateToProps, null)(EnhancedForm));
