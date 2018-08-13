@@ -1,33 +1,1351 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-    <!--
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  <title>React App</title>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+
+  <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+    <!--[if lt IE 9]>
+    <style type="text/css">
+        .wrapper { display: none; }
+        .box-compatibilidade {
+            position: absolute; text-align: center;
+            top: 50%; margin-top: -150px; heigth: 300px;
+            left: 50%;margin-left: -300px;width: 600px;
+        }
+    </style>
+    <div class="box-compatibilidade">
+        <img src="cassi/imgs/logo-cassi.png"/><br/><br/>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title"><strong>Atualize seu navegador para visualizar os serviços da CASSI</strong></h3>
+            </div>
+            <div class="box-body">
+                <h5>Nossos serviços são compatíveis com os navegadores: Internet Explorer, versão 9 ou superior, Safari, versão 5, Chrome e Firefox.</h5>
+                <img src="cassi/imgs/browser-compatibility.png" width="300"/>
+                <h5>Outros navegadores podem funcionar, mas não foram realizados testes de compatibilidade.</h5>
+            </div>
+        </div>
+    </div>
+  <![endif]-->
+    <div class="wrapper">
+
+      <!-- Main Header -->
+      <header class="main-header">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini">
+            <img src="img/LogoSimplesCASSI.png" style="width: 80%">
+          </span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg">
+            <img src="img/logo-cassi-mini.png">
+          </span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <!-- <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a> -->
+          <form action="#" method="GET" class="navbar-form navbar-left">
+            <div class="form-group has-feedback autocomplete">
+              <i class="fa fa-search form-control-feedback"></i>
+              <input type="text" id="inputAutoComplete" class="form-control" placeholder="Busque por módulos, funcionalidades ou processos...">
+            </div>
+          </form>
+
+          <!-- Título da aplicação -->
+          <div class="tituloAplicacao">
+            <span class="">Plataforma Operacional Cassi</span>
+          </div>
+
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Home -->
+              <li class="dropdown">
+                <a href="/" title="Início">
+                  <i class="fa fa-home"></i>
+                </a>
+              </li>
+              <!-- Ouvidoria -->
+              <li>
+                <a href="https://servicosonline.cassi.com.br/FaleCassi/Ouvidoria/" title="Ouvidoria">
+                  <i class="fa fa-volume-control-phone"></i>
+                </a>
+              </li>
+              <!-- Messages: style can be found in dropdown.less-->
+              <li class="dropdown messages-menu">
+                <!-- Menu toggle button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Mensagens">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-success">4</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">Você possui 4 mensagens</li>
+                  <li>
+                    <!-- inner menu: contains the messages -->
+                    <ul class="menu">
+                      <li>
+                        <!-- start message -->
+                        <a href="#">
+                          <!-- Message title and timestamp -->
+                          <h4>
+                            Assunto mensagem
+                            <small>
+                              <i class="fa fa-clock-o"></i> 5 minutos</small>
+                          </h4>
+                          <!-- The message -->
+                          <p>Conteúdo da mensagem</p>
+                        </a>
+                      </li>
+                      <!-- end message -->
+                    </ul>
+                    <!-- /.menu -->
+                  </li>
+                  <li class="footer">
+                    <a href="#">Ver todas as mensagens</a>
+                  </li>
+                </ul>
+              </li>
+              <!-- /.messages-menu -->
+
+              <!-- Notifications Menu -->
+              <li class="dropdown notifications-menu">
+                <!-- Menu toggle button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Notificações">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="label label-warning">10</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">Você possui 10 notificações</li>
+                  <li>
+                    <!-- Inner Menu: contains the notifications -->
+                    <ul class="menu">
+                      <li>
+                        <!-- start notification -->
+                        <a href="#">
+                          <i class="fa fa-users"></i> Conteúdo da notificação
+                        </a>
+                      </li>
+                      <!-- end notification -->
+                    </ul>
+                  </li>
+                  <li class="footer">
+                    <a href="#">Ver todas as notificações</a>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- User Account Menu -->
+              <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!-- The user image in the navbar-->
+                  <img src="img/avatar5.png" class="user-image" alt="User Image">
+                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                  <span class="hidden-xs hidden-sm">Leandro Alves</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- The user image in the menu -->
+                  <li class="user-header">
+                    <img src="img/avatar5.png" class="img-circle" alt="User Image">
+
+                    <p>
+                      Leandro Alves - Analista de TI
+                      <small>Colaborador desde maio de 2014</small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="row">
+                      <div class="col-xs-4 text-center">
+                        <a href="#">Opção</a>
+                      </div>
+                      <div class="col-xs-4 text-center">
+                        <a href="#">Opção</a>
+                      </div>
+                      <div class="col-xs-4 text-center">
+                        <a href="#">Opção</a>
+                      </div>
+                    </div>
+                    <!-- /.row -->
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat">Sair</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <!-- <li>
+              <a href="#" data-toggle="control-sidebar">
+                <i class="fa fa-gears"></i>
+              </a>
+            </li> -->
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu" data-widget="tree">
+            <!-- Optionally, you can add icons to the links -->
+            <li>
+              <a href="#">
+                <i class="fa fa-suitcase" aria-hidden="true"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Gestão empresarial</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Governança</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Sistema de Decisões</a>
+                      </li>
+                    </ul>
+                    <h4>Cadastro de Contratos</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cobertura</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Cadastro de Planos</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Preço de mensalidade</a>
+                      </li>
+                      <li>
+                        <a href="#">Participação Financeira</a>
+                      </li>
+                      <li>
+                        <a href="#">Cobertura</a>
+                      </li>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Preço de mensalidade</a>
+                      </li>
+                    </ul>
+                    <h4>Faturamento</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Mensalidade</a>
+                      </li>
+                      <li>
+                        <a href="#">Contriubuições</a>
+                      </li>
+                      <li>
+                        <a href="#">Coparticipação</a>
+                      </li>
+                      <li>
+                        <a href="#">PAS</a>
+                      </li>
+                      <li>
+                        <a href="#">Pagamento de guias</a>
+                      </li>
+                      <li>
+                        <a href="#">Impostos</a>
+                      </li>
+                      <li>
+                        <a href="#">PAF</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>DMED (Receita/IR)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar DMED</a>
+                      </li>
+                    </ul>
+                    <h4>Parametrização de Regras Contábeis</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Parametrizar regra contábil</a>
+                      </li>
+                    </ul>
+                    <h4>Parametrização de leiautes bancários</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Parametrizar leiaute bancário</a>
+                      </li>
+                    </ul>
+                    <h4>Parametrização das tabelas de Impostos</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Parametrizar tabela de imposto</a>
+                      </li>
+                    </ul>
+                    <h4>Notas Fiscais</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Analisar notas fiscais</a>
+                      </li>
+                    </ul>
+                    <h4>Inadimplência</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Gerar relatório mensal de inadimplência</a>
+                      </li>
+                    </ul>
+                    <h4>Cadastro de funcionários</h4>
+                    <ul>
+                      <li>
+                        <a href="cadastroFuncionario.html">Cadastrar</a>
+                      </li>
+                      <li>
+                        <a href="listaFuncionarios.html">Listar</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-users"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Beneficiários</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Cadastro de Beneficiários</h4>
+                    <ul>
+                      <li>
+                        <a href="cadastro.html">Cadastro</a>
+                      </li>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Preço de mensalidade</a>
+                      </li>
+                      <li>
+                        <a href="#">Participação Financeira</a>
+                      </li>
+                    </ul>
+                    <h4>Cadastro de Contratos</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cobertura</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Cadastro de regulação do Plano</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cobertura</a>
+                      </li>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Preço de mensalidade</a>
+                      </li>
+                      <li>
+                        <a href="#">Participação Financeira</a>
+                      </li>
+                      <li>
+                        <a href="#">Cobertura</a>
+                      </li>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Preço de mensalidade</a>
+                      </li>
+                      <li>
+                        <a href="#">Participação Financeira</a>
+                      </li>
+                      <li>
+                        <a href="#">Cobertura</a>
+                      </li>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Preço de mensalidade</a>
+                      </li>
+                      <li>
+                        <a href="#">Participação Financeira</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Cadastro de Planos</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Preço de mensalidade</a>
+                      </li>
+                      <li>
+                        <a href="#">Participação Financeira</a>
+                      </li>
+                      <li>
+                        <a href="#">Cobertura</a>
+                      </li>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                      <li>
+                        <a href="#">Preço de mensalidade</a>
+                      </li>
+                    </ul>
+                    <h4>Gestão de cartões</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cobertura</a>
+                      </li>
+                      <li>
+                        <a href="#">Carência</a>
+                      </li>
+                      <li>
+                        <a href="#">Limite</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-hospital-o"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Prestadores</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Cadastro de Prestadores</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Credenciamento</a>
+                      </li>
+                      <li>
+                        <a href="#">Descredenciamento</a>
+                      </li>
+                      <li>
+                        <a href="#">Impostos</a>
+                      </li>
+                    </ul>
+                    <h4>Gestão de Tabelas de preços</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Tabela de preços</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Rotinas de Inclusão e Reajuste de Preço</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Rotinas de Inclusão</a>
+                      </li>
+                      <li>
+                        <a href="#">Rotinas</a>
+                      </li>
+                      <li>
+                        <a href="#">Rotinas de Reajuste</a>
+                      </li>
+                    </ul>
+                    <h4>Cadastro de especialidades</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar especialidade</a>
+                      </li>
+                      <li>
+                        <a href="#">Consultar especialidade</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório de especialidades</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Cadastro de Alertas</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar alerta</a>
+                      </li>
+                      <li>
+                        <a href="#">Consultar alerta</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório de alertas</a>
+                      </li>
+                    </ul>
+                    <h4>Rede MAIS</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar Prestadores Rede MAIS</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório Prestadores Rede MAIS</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-font"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>ANS - Agência Nacional de Saúde Suplementar</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Rotina de Monitoramento TISS</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar rotina</a>
+                      </li>
+                      <li>
+                        <a href="#">Editar rotina</a>
+                      </li>
+                    </ul>
+                    <h4>DIOPS* (Quadro econômico financeiro e cadastro)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Quadro econômico financeiro e cadastro</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>SIP - Sistema de Informações de Produtos (Procedimentos)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Listar procedimentos</a>
+                      </li>
+                      <li>
+                        <a href="#">Visualizar informações de produtos</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Cadastro de Nº de Registro na ANS</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar número de registro na ANS</a>
+                      </li>
+                      <li>
+                        <a href="#">Consultar número de registro na ANS</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório de números registrados</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-thumbs-o-up"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Autorizador Externo</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Rotina de Carga Orizon (Dados Cadastrais e Negociais)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar rotina</a>
+                      </li>
+                      <li>
+                        <a href="#">Editar rotina</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Parametrização de De/Para das integrações com a Orizon</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Parametrizar De/Para</a>
+                      </li>
+                      <li>
+                        <a href="#">Consultar parametrização De/Para</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Importação de log Orizon (Autorizações)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Importar log</a>
+                      </li>
+                      <li>
+                        <a href="#">Exportar log</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-plus-square-o"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Diversos</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Cadastro de Feriados</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar feriados</a>
+                      </li>
+                      <li>
+                        <a href="#">Consultar feriados</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório de feriados</a>
+                      </li>
+                    </ul>
+                    <h4>Cadastro de Países, Estados e Municípios</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar países</a>
+                      </li>
+                      <li>
+                        <a href="#">Cadastrar estados</a>
+                      </li>
+                      <li>
+                        <a href="#">Cadastrar municípios</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório países, estados e municípios</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Cadastro de Regiões</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar Regiões</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório de regiões</a>
+                      </li>
+                    </ul>
+                    <h4>Cadastro de Unidades CASSI</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar unidade CASSI</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório das unidades CASSI</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Controle de numeração de FAC para rotinas de Correspondência</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar numeração de FAC</a>
+                      </li>
+                      <li>
+                        <a href="#">Visualizar numeração de FAC</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-cog"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>ADM</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Gestão de usuários e grupos de segurança</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar usuários</a>
+                      </li>
+                      <li>
+                        <a href="#">Consultar usuários</a>
+                      </li>
+                      <li>
+                        <a href="#">Cadastrar grupos de segurança</a>
+                      </li>
+                      <li>
+                        <a href="#">Consultar grupos de segurança</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatórios</a>
+                      </li>
+                    </ul>
+                    <h4>Parametrização de Tarefas Modelo para Agendamento (Batch)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Parametrizar tarefa modelo</a>
+                      </li>
+                      <li>
+                        <a href="#">Visualiar tarefas modelo</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório das tarefas modelo</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Tabelas de Sistema</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar tabelas de sistema</a>
+                      </li>
+                    </ul>
+                    <h4>Tabelas do Cliente</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar tabelas do cliente</a>
+                      </li>
+                    </ul>
+                    <h4>Parâmetros Gerais</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar parâmetro geral</a>
+                      </li>
+                    </ul>
+                    <h4>Gerenciador de Relatórios</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Gerar relatórios</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Organograma</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Realizar pesquisa</a>
+                      </li>
+                    </ul>
+                    <h4>Atualizações</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar últimas atualizações</a>
+                      </li>
+                    </ul>
+                    <h4>Verificações</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar últimas verificações</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-gamepad"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Simulador</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Simulador de Reajuste em Diárias e Taxas</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Simular reajustes</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório de reajustes</a>
+                      </li>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-heartbeat"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Atendimento (CAO)</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Atendimento ao Parcicipante (Registro de Protocolo)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Registrar protocolo</a>
+                      </li>
+                      <li>
+                        <a href="#">Consultar protocolo</a>
+                      </li>
+                    </ul>
+                    <h4>Liberação de Autorizações</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Liberar autorização</a>
+                      </li>
+                    </ul>
+                    <h4>Atendimento ao Prestador</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar prestador</a>
+                      </li>
+                    </ul>
+                    <h4>Processo de Remoção</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Verificar processo de remoção</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Módulo de Retenção e Prospecção de beneficiários</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar retenção e prospecção de beneficiários</a>
+                      </li>
+                    </ul>
+                    <h4>Auditoria/Perícia</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar relatórios de auditoria/perícia</a>
+                      </li>
+                    </ul>
+                    <h4>Módulo de OPME</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar OPME</a>
+                      </li>
+                    </ul>
+                    <h4>Módulo de Quimioterapia</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar quimioterapia</a>
+                      </li>
+                    </ul>
+                    <h4>Módulo de Outros serviços (2ª via, cartão, etc)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Emitir 2ª via do cartão</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Adequação de Débito</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Realizar adequação de débito</a>
+                      </li>
+                    </ul>
+                    <h4>Envio de Resposta por e-mail (Autorizações, Protocolos, boletos)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Enviar resposta de autorização</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-stethoscope"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Clínica</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Prontuário Eletrônico do Paciente</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Agendamentos</a>
+                      </li>
+                      <li>
+                        <a href="#">Atendimentos</a>
+                      </li>
+                      <li>
+                        <a href="#">Sala de espera</a>
+                      </li>
+                    </ul>
+                    <h4>Saúde do Trabalhador (Admissional, EPS, ESO, TABAS, PAVAS)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Exame admissional</a>
+                      </li>
+                      <li>
+                        <a href="#">EPS</a>
+                      </li>
+                      <li>
+                        <a href="#">ESO</a>
+                      </li>
+                      <li>
+                        <a href="#">TABAS</a>
+                      </li>
+                      <li>
+                        <a href="#">PAVAS</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Cadastramento na Estratégia de Saúde da Família</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar participante</a>
+                      </li>
+                    </ul>
+                    <h4>Atividades Coletivas</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar atividades coletivas</a>
+                      </li>
+                    </ul>
+                    <h4>Programas de Saúde</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Gerar relatório dos programas de saúde</a>
+                      </li>
+                    </ul>
+                    <h4>GCC - Gerenciamento de Casos Crônicos</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar casos crônicos</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Administração das equipes</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar equipes</a>
+                      </li>
+                    </ul>
+                    <h4>Vacinação</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Gerar calendário de vacinação</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-medkit"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Programas</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Programa de Assistência Farmacêutica - (PAF)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Prescrever medicamentos</a>
+                      </li>
+                    </ul>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar medicamentos</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Prescrição de medicamentos - (PEP)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Prescrever medicamentos</a>
+                      </li>
+                    </ul>
+                    <h4>Relacionamento com as PBMs</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Visualizar relacionamentos com as PBMs</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Cadastro de Medicamentos (Limaca)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar medicamento</a>
+                      </li>
+                    </ul>
+                    <h4>Controle de Remessa de autorizações para PBMs</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Gerar relatório de controle de remessa</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Envio de cadastro de Participantes para PBMs</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Enviar cadastro de parcipante</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-calculator"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Processamento de Contas (CEPAG)</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Importação de Guias</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Importar Guias</a>
+                      </li>
+                      <li>
+                        <a href="#">Gerar relatório de importação de guias</a>
+                      </li>
+                    </ul>
+                    <h4>Análise de Guias</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Analisar guias</a>
+                      </li>
+                    </ul>
+                    <h4>Revisão de Pagamento</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Revisar pagamento</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Auditoria de Pagamento</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar pagamento</a>
+                      </li>
+                    </ul>
+                    <h4>Gerenciamento de Arquivo Físico</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar local de armazenamento de arquivo físico</a>
+                      </li>
+                    </ul>
+                    <h4>Pagamento de Guias (Análise)</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Analisar guias</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Conferência de Guias</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Conferir guias</a>
+                      </li>
+                    </ul>
+                    <h4>Regras de Alçadas de Pagamento e de Revisão</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Consultar regras de alçadas de pagamento e de revisão</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-exchange"></i>
+              </a>
+              <div class="fulldrop">
+                <div class="page-header">
+                  <h3>Reciprocidade</h3>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Arquivos de Cobrança</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Importar arquivos de cobrança</a>
+                      </li>
+                    </ul>
+                    <h4>Cadastro de Convênios</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Cadastrar convênio</a>
+                      </li>
+                    </ul>
+                    <h4>Faturamento de Pagamento do Convenente</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Faturar pagamento de convenente</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Faturamento de Reembolso de Fator Participativo</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Faturar reembolso de fator participativo</a>
+                      </li>
+                    </ul>
+                    <h4>Rotina de Processamento de guias</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Parametrizar rotina</a>
+                      </li>
+                    </ul>
+                    <h4>Rotina de Solicitação de Cartões</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Parametrizar rotina</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Rotina de Exportação de Conveniados</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Parametrizar rotina</a>
+                      </li>
+                    </ul>
+                    <h4>Parametrização de leiautes</h4>
+                    <ul>
+                      <li>
+                        <a href="#">Parametrizar leiaute</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <div class="content container-fluid">
+            <div id="root"></div>
+        </div>
+      </div>
+
+      <!--------------------------
+        | Your Page Content Here |
+        -------------------------->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+      <!-- To the right -->
+      <div class="pull-right hidden-xs">
+        Versão 1.0
+      </div>
+      <!-- Default to the left -->
+      <strong>Copyright &copy; 2018
+        <a href="#">CASSI</a>.</strong> Todos os direitos reservados.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Create the tabs -->
+      <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+        <li class="active">
+          <a href="#control-sidebar-home-tab" data-toggle="tab">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#control-sidebar-settings-tab" data-toggle="tab">
+            <i class="fa fa-gears"></i>
+          </a>
+        </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <!-- Home tab content -->
+        <div class="tab-pane active" id="control-sidebar-home-tab">
+          <h3 class="control-sidebar-heading">Atividades recentes</h3>
+          <ul class="control-sidebar-menu">
+            <li>
+              <a href="javascript:;">
+                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+                <div class="menu-info">
+                  <h4 class="control-sidebar-subheading">Título da atividade</h4>
+
+                  <p>Conteúdo da atividade</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <!-- /.control-sidebar-menu -->
+
+          <h3 class="control-sidebar-heading">Progresso das atividades</h3>
+          <ul class="control-sidebar-menu">
+            <li>
+              <a href="javascript:;">
+                <h4 class="control-sidebar-subheading">
+                  Título da atividade
+                  <span class="pull-right-container">
+                    <span class="label label-danger pull-right">70%</span>
+                  </span>
+                </h4>
+
+                <div class="progress progress-xxs">
+                  <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <!-- /.control-sidebar-menu -->
+
+        </div>
+        <!-- /.tab-pane -->
+        <!-- Stats tab content -->
+        <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+        <!-- /.tab-pane -->
+        <!-- Settings tab content -->
+        <div class="tab-pane" id="control-sidebar-settings-tab">
+          <form method="post">
+            <h3 class="control-sidebar-heading">Configurações gerais</h3>
+
+            <div class="form-group">
+              <label class="control-sidebar-subheading">
+                Item de configuração
+                <input type="checkbox" class="pull-right" checked>
+              </label>
+
+              <p>
+                Conteúdo de alguma configuração
+              </p>
+            </div>
+            <!-- /.form-group -->
+          </form>
+        </div>
+        <!-- /.tab-pane -->
+      </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.js"></script>
+    <!-- Testando js -->
+    <script src="../cassi/js/main.js"></script>
+    <script>
+      autocomplete(document.getElementById("inputAutoComplete"), modulos);
+    </script>
+
+  </body>
+
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -37,5 +1355,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>

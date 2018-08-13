@@ -36,7 +36,7 @@ class FuncionarioInnerForm extends React.Component {
         } = this.props;
 
         return (
-            <Grid>
+            <div>
                 {
                     Object.keys(errors).length > 0 && (
                         <Alert bsStyle="danger">
@@ -48,7 +48,7 @@ class FuncionarioInnerForm extends React.Component {
                         </Alert>
                     )}
                 <form onSubmit={handleSubmit}>
-                    <Panel>
+                    <Panel bsStyle="primary">
                         <Panel.Heading>Cadastro de funcionários</Panel.Heading>
                         <Panel.Body>
                             <Row className="show-grid">
@@ -108,13 +108,13 @@ class FuncionarioInnerForm extends React.Component {
                             </Row>
                         </Panel.Body>
                         <Panel.Footer>
-                            <Button type="submit" disabled={isSubmitting}>
-                                Enviar
+                            <Button type="submit" disabled={isSubmitting} bsStyle="primary">
+                                {values.isEdicao ? "Atualizar" : "Registrar"}
                             </Button>
                         </Panel.Footer>
                     </Panel>
                 </form>
-            </Grid>
+            </div>
         )
     }
 }

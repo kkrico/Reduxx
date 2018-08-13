@@ -105,7 +105,7 @@ class FuncionarioList extends React.Component {
         const haFuncionarioCadastrado = this.props.authors.length > 0;
         if (haFuncionarioCadastrado)
             return (
-                <Grid>
+                <div>
                     <h1>Funcionários</h1>
                     <Table>
                         <thead>
@@ -127,8 +127,22 @@ class FuncionarioList extends React.Component {
                                         <td>{author.email}</td>
                                         <td>{new Date(author.dataAniversario).toLocaleDateString()}</td>
                                         <td>
-                                            <Link to={"/edit/" + author.id}>Editar</Link>
-                                            <span onClick={() => this.handleClickExcluir(author)}>Excluir</span>
+                                            <Link to={"/edit/" + author.id}>
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </Link>
+                                        </td>
+                                        <td>
+                                            <a href="#" title="Detalhar">
+                                                <i class="fa fa-list-alt" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#" title="Excluir" onClick={() => this.handleClickExcluir(author)} >
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+
                                         </td>
                                     </tr>
                                 }, this)
@@ -148,7 +162,7 @@ class FuncionarioList extends React.Component {
                         </Modal.Footer>
                     </Modal>
                     <Link to="/add">Adicionar funcionario</Link>
-                </Grid >
+                </div >
             );
 
         else

@@ -1,0 +1,177 @@
+/* .fa {
+	font-size: 18px;
+} */
+
+.main-sidebar .fa, nav .fa {
+	font-size: 22px;
+}
+
+/* span.logo-mini > img {
+	vertical-align: initial;
+} */
+
+/* .sidebar-menu > li > a > .fa,
+.sidebar-menu > li > a > .glyphicon,
+.sidebar-menu > li > a > .ion {
+  width: 30px;
+} */
+
+/*
+ * Component: Sidebar Mini
+ */
+ /* @media (min-width: 768px) {
+	.sidebar-mini.sidebar-collapse .content-wrapper,
+	.sidebar-mini.sidebar-collapse .right-side,
+	.sidebar-mini.sidebar-collapse .main-footer {
+	  margin-left: 60px !important;
+	}
+	.sidebar-mini.sidebar-collapse .main-sidebar {
+		width: 60px !important;
+	}
+	.sidebar-mini.sidebar-collapse .main-header .logo {
+		width: 60px;
+	}
+	.sidebar-mini.sidebar-collapse .main-header .sidebar-menubar {
+		margin-left: 60px;
+	}
+	.sidebar-mini.sidebar-collapse .main-header .navbar {
+		margin-left: 60px;
+	}
+} */
+
+.skin-blue .main-header li.user-header {
+	background-color: #367fa9
+}
+
+.skin-blue .main-header .navbar {
+	background-color: #135B9E;
+}
+
+div.form-group.has-feedback input {
+	width: 450px;
+	border-radius: 3px;
+	border: 1px solid #367fa9;
+	background: #367fa9;
+}
+
+.form-control-feedback.fa {
+	color: #fff;
+}
+
+div.form-group.has-feedback input {
+	color: #fff;
+}
+
+div.form-group.has-feedback input::-webkit-input-placeholder {
+	color: #fff !important;
+}
+	
+div.form-group.has-feedback input:-moz-placeholder { /* Firefox 18- */
+	color: #fff !important;  
+}
+	
+div.form-group.has-feedback input::-moz-placeholder {  /* Firefox 19+ */
+	color: #fff !important;  
+}
+	
+div.form-group.has-feedback input:-ms-input-placeholder {  
+	color: #fff !important;  
+}
+
+/*AUTOCOMPLETE*/
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #f4f4f4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #f4f4f4;
+}
+.autocomplete-items div:hover {
+  background-color: #f4f4f4;
+}
+.autocomplete-active {
+  background-color: #135b9e !important;
+  color: #ffffff;
+}
+
+/*
+********************
+*/
+
+.page-header {
+	color: #fff;	 	
+}
+
+.content-header {
+	padding: 25px 10px 10px 10px;
+}
+
+.skin-blue .content-header {
+	background-color: #0C8C6F 	;
+	color: #fff;
+}
+
+/* Basic Style */
+.sidebar-menu ul  li:hover > a {
+	color: #FFFF00;
+}
+
+.sidebar-menu > li > .fulldrop {
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	top: 0px;
+	left: 50px;
+	background-color: #1e282c;
+	width: 1100px;
+	text-align: left;
+	padding: 0px 15px 15px;
+	z-index: 99;
+	overflow: hidden;
+	color: white;
+	height: 100%;
+}
+
+.sidebar-menu > li:hover .fulldrop {
+	opacity: 1;
+	visibility: visible;
+}
+
+.sidebar-menu h4 {
+	color: white;
+	white-space: normal;
+}
+
+.sidebar-menu ul li {
+	list-style: disc;
+}
+
+.sidebar-menu div ul {
+	padding: 0px 0px 0px 15px;
+	white-space: normal;
+}
+
+.tituloAplicacao {
+	font-size: 20px;
+	float: left;
+	color: #fff;
+	margin-top: 10px;
+}
+
+ @media (max-width: 992px) {
+	#inputAutoComplete {
+		width: 300px;
+	}
+}
+
+
+

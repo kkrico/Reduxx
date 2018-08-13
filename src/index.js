@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
-import AuthorQuiz from './AuthorQuiz';
 import AddAuthorForm from './AddAuthorForm';
-import registerServiceWorker from './registerServiceWorker';
-import { shuffle, sample } from 'underscore';
 import ListaFuncionario from './ListaFuncionario';
-import productList from './productList';
 import thunk from 'redux-thunk'
+import './AdminLTE.css';
+import './skin-blue.css';
+import './main.css';
 
 const authors = [];
 
@@ -28,11 +27,6 @@ function reducer(state = {
                 authors: state.authors.concat([action.data])
             });
         case "FETCH_SINGLE_AUTOR":
-            // return {
-            //     ...state,
-            //     selectedAuthor: action.payload
-            // };
-
             return Object.assign({}, state, {
                 selectedAuthor: Object.assign({}, action.payload)
             });
