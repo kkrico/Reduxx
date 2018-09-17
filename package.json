@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "formik": "^1.0.2",
     "react": "^16.4.2",
     "react-bootstrap": "^0.32.1",
@@ -13,7 +14,7 @@
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "underscore": "^1.9.1",
-    "yup": "0.22.0"
+    "yup": "0.23.0"
   },
   "scripts": {
     "start": "react-scripts start",
