@@ -40,9 +40,14 @@ function ErrosValidacao({ errors }) {
 function FuncionarioInput({ nomeCampo, errors, touched, placeholder, onChange, onBlur, value, type, displayName = nomeCampo }) {
     const haErroNoCampo = errors[nomeCampo] && touched[nomeCampo];
 
+    const estilo = {
+        estiloForm: {
+            width : 500,
+            height: 200
+        }};
     return (
 
-        <div className={haErroNoCampo ? ("form-group has-error") : ("form-group")}>
+        <div className={haErroNoCampo ? ("form-group has-error") : ("form-group")} style={estilo.estiloForm}>
             <label htmlFor={nomeCampo} className="control-label">
                 {titleize(displayName)}
             </label>
@@ -187,7 +192,7 @@ const FuncionarioFormValidavel = withFormik({
     validateOnBlur: false,
     validateOnChange: false,
     enableReinitialize: true,
-    displayName: 'Funcionario Form', // helps with React DevTools
+    displayName: 'Funcionário Form', // helps with React DevTools
 })(FuncionarioForm);
 
 
