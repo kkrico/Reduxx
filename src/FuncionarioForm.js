@@ -196,6 +196,8 @@ const FuncionarioFormValidavel = withFormik({
 })(FuncionarioForm);
 
 
+<FuncionarioFormValidavel />
+
 const mapStateToProps = state => {
     return {
         selectedAuthor: state.selectedAuthor
